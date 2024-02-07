@@ -48,11 +48,6 @@ in mkDerivationMempool {
 
     export HOME=$(pwd)
 
-    rm proxy.conf.js
-    cp proxy.conf.mixed.js proxy.conf.js
-
-    cat proxy.conf.js
-
     ${sync} --chmod=+w ${modules}/lib/node_modules .
     patchShebangs node_modules
 

@@ -10789,7 +10789,7 @@ with pkgs;
 
   mediawriter = callPackage ../tools/system/mediawriter { };
 
-  mempool = callPackage ../applications/blockchains/mempool { };
+  mempool = callPackage ../applications/blockchains/mempool/mempool.nix { };
 
   memtier-benchmark = callPackage ../tools/networking/memtier-benchmark { };
 

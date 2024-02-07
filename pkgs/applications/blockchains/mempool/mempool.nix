@@ -1,9 +1,11 @@
-{ fetchFromGitHub, fetchNodeModules, nodejs-18_x, nodejs-slim-18_x
+{ fetchFromGitHub, nodejs-18_x, nodejs-slim-18_x
 , lib, buildNpmPackage, callPackage, runCommand }:
 let
 
   nodejs = nodejs-18_x;
   nodejsRuntime = nodejs-slim-18_x;
+
+  fetchNodeModules = callPackage ./fetch-node-modules.nix { };
 
   src = fetchFromGitHub {
     owner = "mempool";
@@ -21,14 +23,13 @@ let
   };
 
 in {
-
-  mempool-backend = callPackage ./backend.nix {
+  backend = callPackage ./backend.nix {
     inherit nodejs nodejsRuntime src meta fetchNodeModules;
   };
 
-  mempool-frontend = callPackage ./frontend.nix {
+  frontend = callPackage ./frontend.nix {
     inherit nodejs src meta fetchNodeModules;
   };
 
-  mempool-nginx-conf = callPackage ./nginx/default.nix { inherit runCommand; };
+  nginx-conf = callPackage ./nginx/default.nix { inherit runCommand; };
 }

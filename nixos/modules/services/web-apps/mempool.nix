@@ -11,9 +11,6 @@ let
 
   databaseName = "mempool";
 
-  pkg = pkgs.mempool;
-  frontendDocumentRoot = pkg.mempool-frontend;
-
 in
 {
   # interface
@@ -44,9 +41,6 @@ in
 
   config = mkIf cfg.enable {
 
-    # services.mempool.config = mapAttrs (name: mkDefault) {
-    # };
-
     services.mysql = {
       enable = true;
       package = pkgs.mariadb;
@@ -59,16 +53,13 @@ in
       ];
     };
 
-    services.httpd = {
+    services.nginx = {
       enable = true;
-      virtualHosts."mempool" = {
-        # serverName = "_";
-        listen = [{
-          ip = "*";
-          port = 80;
-          ssl = false;
-        }];
-        documentRoot = "/nix/store/i4kr22jxf338dd51qfx40wy201chissk-mempool-frontend-v2.5.0/en-US/"; #frontendDocumentRoot;
+      virtualHosts = {
+        "mempool" = {
+          forceSSL = false;
+          root = "${pkgs.mempool.frontend}/en-US";
+        };
       };
     };
 
