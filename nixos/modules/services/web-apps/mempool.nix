@@ -51,7 +51,7 @@ in
 
       backend.url = mkOption {
         type = types.str;
-        default = "http://127.0.0.1";
+        default = "http://127.0.0.1:8999";
         description = ''
           Mempool's backend URL
         '';
@@ -142,17 +142,31 @@ in
     services.nginx = {
       enable = true;
 
-      # httpConfig = ''
-      #   include ${pkgs.mempool.nginx-conf}/mempool/http-language.conf;
-      # '';
-
       virtualHosts = {
         "mempool" = {
           forceSSL = false;
-          root = "${pkgs.mempool.frontend}/en-US";
+          root = "${pkgs.mempool.frontend}";
           locations = let
             backend = cfg.backend.url;
           in {
+            "/" = {
+              tryFiles = "/en-US/$uri @index-redirect";
+              extraConfig = "expires 10m;";
+            };
+
+            "/resources" = {
+              tryFiles = "$uri @index-redirect";
+              extraConfig = "expires 1h;";
+            };
+
+            "@index-redirect" = {
+              extraConfig = "rewrite (.*) /$lang/index.html;";
+            };
+
+            "~ ^/(ar|bg|bs|cs|da|de|et|el|es|eo|eu|fa|fr|gl|ko|hr|id|it|he|ka|lv|lt|hu|mk|ms|nl|ja|nb|nn|pl|pt|pt-BR|ro|ru|sk|sl|sr|sh|fi|sv|th|tr|uk|vi|zh|hi)/" = {
+              tryFiles = "$uri $uri/ /$1/index.html =404";
+            };
+
             "/api" = {
               proxyPass = "${backend}/api/v1";
             };
@@ -162,16 +176,85 @@ in
             };
 
             "/api/v1/ws" = {
-              proxyPass = backend;
+              proxyPass = "${backend}";
               proxyWebsockets = true;
             };
-
-            # "/resources" = {
-            #   proxyPass = "${pkgs.mempool.frontend}/resources";
-            # };
           };
         };
       };
+
+      appendHttpConfig = ''
+        map $http_accept_language $header_lang {
+	          default ''';
+            ~*^en-US ''';
+            ~*^en ''';
+            ~*^ar ar;
+            ~*^cs cs;
+            ~*^da da;
+            ~*^de de;
+            ~*^es es;
+            ~*^fa fa;
+            ~*^fr fr;
+            ~*^ko ko;
+            ~*^hi hi;
+            ~*^it it;
+            ~*^he he;
+            ~*^ka ka;
+            ~*^hu hu;
+            ~*^mk mk;
+            ~*^nl nl;
+            ~*^ja ja;
+            ~*^nb nb;
+            ~*^pl pl;
+            ~*^pt pt;
+            ~*^ro ro;
+            ~*^ru ru;
+            ~*^sl sl;
+            ~*^fi fi;
+            ~*^sv sv;
+            ~*^th th;
+            ~*^tr tr;
+            ~*^uk uk;
+            ~*^vi vi;
+            ~*^zh zh;
+            ~*^lt lt;
+          }
+        map $cookie_lang $lang {
+            default $header_lang;
+            ~*^en-US ''';
+            ~*^en ''';
+            ~*^ar ar;
+            ~*^cs cs;
+            ~*^da da;
+            ~*^de de;
+            ~*^es es;
+            ~*^fa fa;
+            ~*^fr fr;
+            ~*^ko ko;
+            ~*^hi hi;
+            ~*^it it;
+            ~*^he he;
+            ~*^ka ka;
+            ~*^hu hu;
+            ~*^mk mk;
+            ~*^nl nl;
+            ~*^ja ja;
+            ~*^nb nb;
+            ~*^pl pl;
+            ~*^pt pt;
+            ~*^ro ro;
+            ~*^ru ru;
+            ~*^sl sl;
+            ~*^fi fi;
+            ~*^sv sv;
+            ~*^th th;
+            ~*^tr tr;
+            ~*^uk uk;
+            ~*^vi vi;
+            ~*^zh zh;
+            ~*^lt lt;
+          }
+      '';
     };
 
     users.groups.wwwrun = {};
