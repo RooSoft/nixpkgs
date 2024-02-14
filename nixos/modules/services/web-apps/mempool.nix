@@ -64,7 +64,7 @@ in
       };
 
       bitcoinCore.port = mkOption {
-        type = types.int;
+        type = types.port;
         default = "8332";
         description = lib.mdDoc ''
           Bitcoin core node RPC API port
@@ -96,7 +96,7 @@ in
       };
 
       electrum.port = mkOption {
-        type = types.int;
+        type = types.port;
         default = "50001";
         description = lib.mdDoc ''
           Electrum server's port
