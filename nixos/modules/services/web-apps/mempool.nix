@@ -145,6 +145,7 @@ in
       enable = true;
 
       recommendedGzipSettings = true;
+      recommendedOptimisation = true;
 
       virtualHosts = {
         "mempool" = {
