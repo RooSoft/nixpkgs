@@ -14,7 +14,7 @@ let
 
   mempoolConfig = {
     MEMPOOL = {
-      BACKEND = cfg.backend;
+      BACKEND = "electrum";
     };
     CORE_RPC = {
       HOST = cfg.bitcoinCore.host;
@@ -98,14 +98,6 @@ in
         default = "some_hard_to_guess_password";
         description = ''
           Bitcoin Core RPC RPC API password
-        '';
-      };
-
-      electrum.backend = mkOption {
-        type = types.enum [ "electrs" "esplora" ];
-        default = "electrs";
-        description = lib.mdDoc ''
-          Electrum server type, either `electrs` or `esplora`
         '';
       };
 
