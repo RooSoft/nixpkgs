@@ -144,6 +144,8 @@ in
     services.nginx = {
       enable = true;
 
+      recommendedGzipSettings = true;
+
       virtualHosts = {
         "mempool" = {
           forceSSL = false;
