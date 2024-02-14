@@ -16419,6 +16419,12 @@
     githubId = 1312525;
     name = "Rongcui Dong";
   };
+  roosoft = {
+    email = "nix@roosoft.com";
+    github = "roosoft";
+    githubId = 665949;
+    name = "Marc Lacoursière";
+  };
   roosemberth = {
     email = "roosembert.palacios+nixpkgs@posteo.ch";
     matrix = "@roosemberth:orbstheorem.ch";

@@ -298,4 +298,6 @@ in
       isSystemUser = true;
     };
   };
+
+  meta.maintainers = with lib.maintainers; [ roosoft ];
 }
