@@ -30,6 +30,4 @@ in {
   frontend = callPackage ./frontend.nix {
     inherit nodejs src meta fetchNodeModules;
   };
-
-  nginx-conf = callPackage ./nginx/default.nix { inherit runCommand; };
 }
