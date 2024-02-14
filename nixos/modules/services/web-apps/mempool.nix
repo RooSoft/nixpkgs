@@ -27,7 +27,7 @@ let
     ELECTRUM = {
       HOST = cfg.electrum.host;
       PORT = cfg.electrum.port;
-      TLS_ENABLED = false;
+      TLS_ENABLED = cfg.electrum.tls;
     };
     DATABASE = {
       ENABLED = true;
@@ -122,6 +122,14 @@ in
         default = "50001";
         description = lib.mdDoc ''
           Electrum server's port
+        '';
+      };
+
+      electrum.tls = mkOption {
+        type = types.bool;
+        default = false;
+        description = lib.mdDoc ''
+          Enable TLS
         '';
       };
     };
