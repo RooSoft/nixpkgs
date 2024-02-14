@@ -14,7 +14,7 @@ let
 
   mempoolConfig = {
     CORE_RPC = {
-      HOST = cfg.bitcoinCore.ip;
+      HOST = cfg.bitcoinCore.host;
       PORT = cfg.bitcoinCore.port;
       USERNAME = "mempool";
       PASSWORD = cfg.bitcoinCore.rpc.password;
@@ -22,7 +22,7 @@ let
       COOKIE = false;
     };
     ELECTRUM = {
-      HOST = cfg.electrum.ip;
+      HOST = cfg.electrum.host;
       PORT = cfg.electrum.port;
       TLS_ENABLED = false;
     };
@@ -43,8 +43,6 @@ let
 
 in
 {
-  # interface
-
   options = {
     services.mempool = {
       enable = mkEnableOption (lib.mdDoc "Mempool: explore the full Bitcoin ecosystem");
@@ -57,11 +55,11 @@ in
         '';
       };
 
-      bitcoinCore.ip = mkOption {
+      bitcoinCore.host = mkOption {
         type = types.str;
         default = "127.0.0.1";
         description = lib.mdDoc ''
-          Bitcoin Core node's IP
+          Bitcoin Core node RPC API host
         '';
       };
 
@@ -69,7 +67,7 @@ in
         type = types.int;
         default = "8332";
         description = lib.mdDoc ''
-          Bitcoin core node's port
+          Bitcoin core node RPC API port
         '';
       };
 
@@ -77,15 +75,15 @@ in
         type = types.str;
         default = "some_hard_to_guess_password";
         description = ''
-          Bitcoin Core RPC password
+          Bitcoin Core RPC RPC API password
         '';
       };
 
-      electrum.ip = mkOption {
+      electrum.host = mkOption {
         type = types.str;
         default = "127.0.0.1";
         description = lib.mdDoc ''
-          Electrum server's IP
+          Electrum server's host
         '';
       };
 
@@ -96,11 +94,8 @@ in
           Electrum server's port
         '';
       };
-
     };
   };
-
-  # implementation
 
   config = mkIf cfg.enable {
     systemd.services.mempool-backend = {
@@ -124,7 +119,6 @@ in
 
         StateDirectory = "mempool";
       };
-
     };
 
     services.mysql = {
