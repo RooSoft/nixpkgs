@@ -3,7 +3,6 @@
 , fetchFromSourcehut
 , qbe
 , fetchgit
-, unstableGitUpdater
 }:
 let
   # harec needs the dbgfile and dbgloc features implemented up to this commit.
@@ -23,13 +22,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "harec";
-  version = "0-unstable-2024-01-29";
+  version = "unstable-2024-02-03";
 
   src = fetchFromSourcehut {
     owner = "~sircmpwn";
     repo = "harec";
-    rev = "f9e17e633845d8d38566b4ea32db0a29ac85d96e";
-    hash = "sha256-Xy9VOcDtbJUz3z6Vk8bqH41VbAFKtJ9fzPGEwVz8KQM=";
+    rev = "09cb18990266eef814917d8211d38b82e0896532";
+    hash = "sha256-cxWRqGipoDATN1+V9s9S2WJ3sLMcTqIJmhP5XTld3AU=";
   };
 
   nativeBuildInputs = [
@@ -59,7 +58,6 @@ stdenv.mkDerivation (finalAttrs: {
     # We create this attribute so that the `hare` package can access the
     # overwritten `qbe`.
     qbeUnstable = qbe';
-    updateScript = unstableGitUpdater { };
   };
 
   meta = {

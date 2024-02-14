@@ -219,6 +219,7 @@
   ./programs/msmtp.nix
   ./programs/mtr.nix
   ./programs/nano.nix
+  ./programs/nautilus-open-any-terminal.nix
   ./programs/nbd.nix
   ./programs/neovim.nix
   ./programs/nethoscope.nix
@@ -316,7 +317,6 @@
   ./security/oath.nix
   ./security/pam.nix
   ./security/pam_mount.nix
-  ./security/pam_usb.nix
   ./security/please.nix
   ./security/polkit.nix
   ./security/rngd.nix
@@ -410,7 +410,6 @@
   ./services/continuous-integration/buildbot/worker.nix
   ./services/continuous-integration/buildkite-agents.nix
   ./services/continuous-integration/gitea-actions-runner.nix
-  ./services/continuous-integration/github-runner.nix
   ./services/continuous-integration/github-runners.nix
   ./services/continuous-integration/gitlab-runner.nix
   ./services/continuous-integration/gocd-agent/default.nix
@@ -578,6 +577,7 @@
   ./services/home-automation/ebusd.nix
   ./services/home-automation/esphome.nix
   ./services/home-automation/evcc.nix
+  ./services/home-automation/govee2mqtt.nix
   ./services/home-automation/home-assistant.nix
   ./services/home-automation/homeassistant-satellite.nix
   ./services/home-automation/zigbee2mqtt.nix
@@ -1348,7 +1348,6 @@
   ./services/web-apps/powerdns-admin.nix
   ./services/web-apps/pretalx.nix
   ./services/web-apps/prosody-filer.nix
-  ./services/web-apps/restya-board.nix
   ./services/web-apps/rimgo.nix
   ./services/web-apps/sftpgo.nix
   ./services/web-apps/suwayomi-server.nix
@@ -1527,6 +1526,7 @@
   ./tasks/filesystems/jfs.nix
   ./tasks/filesystems/nfs.nix
   ./tasks/filesystems/ntfs.nix
+  ./tasks/filesystems/overlayfs.nix
   ./tasks/filesystems/reiserfs.nix
   ./tasks/filesystems/sshfs.nix
   ./tasks/filesystems/squashfs.nix
