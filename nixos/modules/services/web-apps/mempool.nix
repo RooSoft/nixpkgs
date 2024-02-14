@@ -40,7 +40,7 @@ let
     };
   };
 
-  mempoolJsonConfig = builtins.toJSON mempoolConfig;
+  mempoolJsonConfig = if cfg.rawConfig == "" then builtins.toJSON mempoolConfig else cfg.rawConfig;
 
   mempoolConfigFile = pkgs.writeText "config.json" mempoolJsonConfig;
 
@@ -49,6 +49,17 @@ in
   options = {
     services.mempool = {
       enable = mkEnableOption (lib.mdDoc "Mempool: explore the full Bitcoin ecosystem");
+
+      rawConfig = mkOption {
+        type = types.lines;
+        default = "";
+        description = ''
+          A whole configuration file in JSON format, such as the one found here
+          `https://github.com/mempool/mempool/blob/v2.5.0/backend/mempool-config.sample.json`.
+
+          This is mutually exclusive with any other option besides `enable`.
+        '';
+      };
 
       backend.url = mkOption {
         type = types.str;
