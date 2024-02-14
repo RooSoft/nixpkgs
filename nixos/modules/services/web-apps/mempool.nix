@@ -16,7 +16,7 @@ let
     CORE_RPC = {
       HOST = cfg.bitcoinCore.host;
       PORT = cfg.bitcoinCore.port;
-      USERNAME = "mempool";
+      USERNAME = cfg.bitcoinCore.rpc.username;
       PASSWORD = cfg.bitcoinCore.rpc.password;
       TIMEOUT = 60000;
       COOKIE = false;
@@ -68,6 +68,14 @@ in
         default = "8332";
         description = lib.mdDoc ''
           Bitcoin core node RPC API port
+        '';
+      };
+
+      bitcoinCore.rpc.username = mkOption {
+        type = types.str;
+        default = "mempool";
+        description = ''
+          Bitcoin Core RPC RPC API user name
         '';
       };
 
