@@ -16,8 +16,8 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "Blockstream";
     repo = "electrs";
-    rev = "3a105828cd6684be84e36fb1eb8f08f62428618a";
-    hash = "sha256-U7o6b/UbPw0LSVPUzxmTd+03GM2S/RsxdS9mopmsnDU=";
+    rev = "01bd5f91f453358db40864998c5a15ce8c2c36fc";
+    hash = "sha256-FuQmedeO/8yJluju+3cx2UREU7LFuGTXPxRdYt97jNg=";
   };
 
   cargoLock = {
