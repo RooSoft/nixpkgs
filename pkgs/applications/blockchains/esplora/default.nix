@@ -16,7 +16,7 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "Blockstream";
     repo = "electrs";
-    rev = "05828cd6684be84e36fb1eb8f08f62428618a";
+    rev = "3a105828cd6684be84e36fb1eb8f08f62428618a";
     hash = "sha256-U7o6b/UbPw0LSVPUzxmTd+03GM2S/RsxdS9mopmsnDU=";
   };
 
