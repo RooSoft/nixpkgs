@@ -36932,10 +36932,6 @@ with pkgs;
 
   erigon = callPackage ../applications/blockchains/erigon { };
 
-  esplora = callPackage ../applications/blockchains/esplora {
-    inherit (darwin.apple_sdk.frameworks) Security;
-  };
-
   exodus = callPackage ../applications/blockchains/exodus { };
 
   faraday = callPackage ../applications/blockchains/faraday { };
@@ -36988,6 +36984,10 @@ with pkgs;
   lndhub-go = callPackage ../applications/blockchains/lndhub-go { };
 
   lndmanage = callPackage ../applications/blockchains/lndmanage { };
+
+  mempool-electrs = callPackage ../applications/blockchains/mempool-electrs {
+    inherit (darwin.apple_sdk.frameworks) Security;
+  };
 
   monero-cli = callPackage ../applications/blockchains/monero-cli {
     inherit (darwin.apple_sdk.frameworks) CoreData IOKit PCSC;
