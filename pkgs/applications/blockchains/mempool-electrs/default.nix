@@ -3,12 +3,11 @@
 , rustPlatform
 , fetchFromGitHub
 , Security
-, rocksdb
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "mempool-electrs";
-  version = "20240215";
+  version = "20240218";
 
   src = fetchFromGitHub {
     owner = "mempool";
@@ -26,10 +25,6 @@ rustPlatform.buildRustPackage rec {
 
   # needed for librocksdb-sys
   nativeBuildInputs = [ rustPlatform.bindgenHook ];
-
-  # link rocksdb dynamically
-  # ROCKSDB_INCLUDE_DIR = "${rocksdb}/include";
-  # ROCKSDB_LIB_DIR = "${rocksdb}/lib";
 
   buildInputs = lib.optionals stdenv.isDarwin [ Security ];
 
