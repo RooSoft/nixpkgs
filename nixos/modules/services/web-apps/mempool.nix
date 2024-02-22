@@ -15,6 +15,7 @@ let
   mempoolConfig = {
     MEMPOOL = {
       BACKEND = "electrum";
+      STDOUT_LOG_MIN_PRIORITY = cfg.logLevel;
     };
     CORE_RPC = {
       HOST = cfg.bitcoinCore.host;
@@ -59,6 +60,12 @@ in
 
           This is mutually exclusive with any other option besides `enable`.
         '';
+      };
+
+      logLevel = mkOption {
+        type = types.enum ["info" "debug"];
+        default = "debug";
+        description = "Amount of logging, either `info` or `debug`";
       };
 
       backend.url = mkOption {
